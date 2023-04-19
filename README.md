@@ -53,10 +53,10 @@ mvn clean test -DsuiteTest=crossBrow
 ### Environment Test
 ### QA
 ```bash
-mvn clean test -Dtest=login -Denv=qa
+mvn clean test -Dtest=login -Denvironment=qa
 ```
 
 ### DEV
 ```bash
-mvn clean test -Dtest-login -Denv-dev
+mvn clean test -Dtest-login -Denvironment=dev
 ```
