@@ -1,79 +1,91 @@
 package driver;
+
+import baseClass.Configuration;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 public class Browser {
     public static WebDriver driver;
 
-    public static void openBrowser(String browserName, String url) {
+    // Chrome Driver Options
+    static void chromeDriverOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver(chromeOptions);
+    }
+
+    // Firefox Driver Options
+    static void firefoxDriverOptions() {
+        FirefoxOptions ffOptions = new FirefoxOptions();
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver(ffOptions);
+    }
+
+    // Safari Driver Options
+    static void safariDriverOptions() {
+        SafariOptions safariOptions = new SafariOptions();
+        driver = new SafariDriver(safariOptions);
+    }
+
+    // Edge Driver Options
+    static void edgeDriverOptions() {
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+    }
+
+    public static Configuration config = ConfigFactory.create(Configuration.class);
+
+    @BeforeClass(alwaysRun = true)
+    @Parameters({"browserName", "url"})
+    public static void openBrowser(@Optional String browserName, @Optional String url) {
+        // condition to assign browser name if its null
+        if (browserName == null) {
+            browserName = config.browserName();
+            url = config.url();
+        }
         switch (browserName) {
             case "chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--remote-allow-origins=*");
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver(chromeOptions);
+                chromeDriverOptions();
                 break;
-
             case "fireFox":
-                FirefoxOptions ffOptions = new FirefoxOptions();
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver(ffOptions);
+                firefoxDriverOptions();
                 break;
-
             case "safari":
-                SafariOptions safariOptions = new SafariOptions();
-                driver = new SafariDriver(safariOptions);
+                safariDriverOptions();
                 break;
-
-            case "opera":
-                WebDriverManager.operadriver().setup();
-                driver = new OperaDriver();
-                break;
-
             case "edge":
-                WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
-                break;
-
-            case "ie":
-                WebDriverManager.iedriver().setup();
-                driver = new InternetExplorerDriver();
+                edgeDriverOptions();
                 break;
         }
-
         driver.get(url);
-
     }
 
     public static void crossBrowser(String browser, String url) {
         if (browser.equalsIgnoreCase("chrome")) {
-
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--remote-allow-origins=*");
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(chromeOptions);
-
+            chromeDriverOptions();
         } else if (browser.equalsIgnoreCase("firefox")) {
-
-            FirefoxOptions ffOptions = new FirefoxOptions();
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver(ffOptions);
-
+            firefoxDriverOptions();
         } else if (browser.equalsIgnoreCase("safari")) {
-
-            SafariOptions safariOptions = new SafariOptions();
-            driver = new SafariDriver(safariOptions);
+            safariDriverOptions();
         }
-
         driver.get(url);
+    }
+
+    @AfterTest
+    public static void tearDown() {
+        driver.close();
     }
 }
