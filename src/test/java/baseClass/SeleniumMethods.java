@@ -1,4 +1,5 @@
 package baseClass;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Actions;
@@ -9,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 
 public class SeleniumMethods extends driver.Browser {
-//    public static WebDriver driver;
     public static Robot robot;
     public static Actions action;
     public static Select select;
