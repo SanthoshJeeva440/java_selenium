@@ -14,11 +14,9 @@ public class SearchHotel extends driver.Browser{
 
     public Configuration config = ConfigFactory.create(Configuration.class);
 
-    @BeforeClass
+    @Test
+    public void Login(){
 
-    public void startTest(){
-
-        openBrowser(config.browserName(),config.url());
         maximizeWindow();
         LoginHotel.loginWithCorrectUsernameAndPassword(config.userName(),config.password());
 
@@ -33,10 +31,5 @@ public class SearchHotel extends driver.Browser{
         validateRequiredField();
         clickSearchButton();
         Thread.sleep(2000);
-    }
-
-    @AfterClass
-    public void endTest(){
-        closeAllBrowser();
     }
 }

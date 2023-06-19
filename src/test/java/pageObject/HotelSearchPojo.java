@@ -2,12 +2,24 @@ package pageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class HotelSearchPojo extends LoginPojo{
+public class HotelSearchPojo{
+
+    public static HotelSearchPojo hotelSearchInstance;
+
     public HotelSearchPojo(){
-        PageFactory.initElements(driver, this);
+
     }
+
+    // page object achieved by single design pattern
+    public static HotelSearchPojo getHotelSearchInstance(){
+
+        if(hotelSearchInstance == null){
+            hotelSearchInstance = new HotelSearchPojo();
+        }
+        return hotelSearchInstance;
+    }
+
     @FindBy(css = "#location")
     private WebElement selectLocation;
 

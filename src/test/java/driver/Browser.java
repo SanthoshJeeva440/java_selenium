@@ -11,10 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class Browser {
     public static WebDriver driver;
@@ -30,7 +27,6 @@ public class Browser {
     // Firefox Driver Options
     static void firefoxDriverOptions() {
         FirefoxOptions ffOptions = new FirefoxOptions();
-        WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver(ffOptions);
     }
 
@@ -56,6 +52,9 @@ public class Browser {
             browserName = config.browserName();
             url = config.url();
         }
+        else {
+            url = config.url();
+        }
         switch (browserName) {
             case "chrome":
                 chromeDriverOptions();
@@ -73,18 +72,7 @@ public class Browser {
         driver.get(url);
     }
 
-    public static void crossBrowser(String browser, String url) {
-        if (browser.equalsIgnoreCase("chrome")) {
-            chromeDriverOptions();
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            firefoxDriverOptions();
-        } else if (browser.equalsIgnoreCase("safari")) {
-            safariDriverOptions();
-        }
-        driver.get(url);
-    }
-
-    @AfterTest
+    @AfterClass
     public static void tearDown() {
         driver.close();
     }
