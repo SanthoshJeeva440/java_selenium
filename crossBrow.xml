@@ -3,23 +3,20 @@
 <suite name="All Test Suite">
     <test name="chrome test">
         <parameter name="browserName" value="chrome"></parameter>
-        <classes>
-            <class name="e2e.login">
-            </class>
-        </classes>
+        <packages>
+            <package name="e2e"></package>
+        </packages>
     </test>
     <test name="ff test">
         <parameter name="browserName" value="fireFox"></parameter>
-        <classes>
-            <class name="e2e.login">
-            </class>
-        </classes>
+        <packages>
+            <package name="e2e"></package>
+        </packages>
     </test>
     <test name="safari test">
         <parameter name="browserName" value="safari"></parameter>
-        <classes>
-            <class name="e2e.login">
-            </class>
-        </classes>
+        <packages>
+            <package name="e2e"></package>
+        </packages>
     </test>
 </suite>

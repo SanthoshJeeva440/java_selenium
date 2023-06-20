@@ -5,8 +5,6 @@ import pageObject.PageObjectManager;
 
 public class SearchHotel{
 
-//    public static HotelSearchPojo hotel = new HotelSearchPojo();
-
     public static void validateRequiredField(){
 
         PageObjectManager.initElements();
@@ -14,17 +12,14 @@ public class SearchHotel{
         SeleniumMethods.selectFromListByIndex(HotelSearchPojo.getHotelSearchInstance().getSelectNosRooms(), 2);
         SeleniumMethods.selectFromListByIndex(HotelSearchPojo.getHotelSearchInstance().getSelectAdultRoom(), 1);
         SeleniumMethods.selectFromListByIndex(HotelSearchPojo.getHotelSearchInstance().getSelectChildRoom(), 2);
-
     }
 
     public static void clickResetButton(){
-
 
         SeleniumMethods.clickElement(HotelSearchPojo.getHotelSearchInstance().getResetButton());
     }
 
     public static void clickSearchButton(){
-
 
         SeleniumMethods.clickElement(HotelSearchPojo.getHotelSearchInstance().getSelectSearchButton());
     }
