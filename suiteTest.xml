@@ -3,8 +3,8 @@
 <suite name="All Test Suite" >
     <test verbose="2" name="search hotel" preserve-order="true" thread-count="1" parallel="classes">
         <classes>
-            <class name="e2e.SearchHotel"/>
             <class name="e2e.login"/>
+            <class name="e2e.SearchHotel"/>
         </classes>
     </test>
 </suite>

@@ -3,13 +3,22 @@ package pageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import org.openqa.selenium.support.PageFactory;
 
-public class LoginPojo extends driver.Browser{
+public class LoginPojo{
+
+    public static LoginPojo loginInstance;
 
     public LoginPojo(){
-        PageFactory.initElements(driver, this);
+
+    }
+    // page object achieved by single design pattern
+    public static LoginPojo getLoginInstance(){
+
+        if(loginInstance == null){
+            loginInstance = new LoginPojo();
+        }
+        return loginInstance;
+
     }
     @FindBy(id = "username")
     private WebElement userName;

@@ -2,33 +2,21 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test name="chrome test">
-        <parameter name="browser" value="chrome"></parameter>
-        <classes>
-            <class name="e2e.login">
-                <methods>
-                    <include name="crossBrowsingTest"></include>
-                </methods>
-            </class>
-        </classes>
+        <parameter name="browserName" value="chrome"></parameter>
+        <packages>
+            <package name="e2e"></package>
+        </packages>
     </test>
     <test name="ff test">
-        <parameter name="browser" value="firefox"></parameter>
-        <classes>
-            <class name="e2e.login">
-                <methods>
-                    <include name="crossBrowsingTest"></include>
-                </methods>
-            </class>
-        </classes>
+        <parameter name="browserName" value="fireFox"></parameter>
+        <packages>
+            <package name="e2e"></package>
+        </packages>
     </test>
     <test name="safari test">
-        <parameter name="browser" value="safari"></parameter>
-        <classes>
-            <class name="e2e.login">
-                <methods>
-                    <include name="crossBrowsingTest"></include>
-                </methods>
-            </class>
-        </classes>
+        <parameter name="browserName" value="safari"></parameter>
+        <packages>
+            <package name="e2e"></package>
+        </packages>
     </test>
 </suite>
